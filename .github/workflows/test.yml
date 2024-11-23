@@ -1,8 +1,9 @@
-name: Test and Deploy
-  on:
-    push:
-      branches:
-        - main
+name: premergedemo
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   test:

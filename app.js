@@ -14,7 +14,7 @@ app.use("/api", endpoints)
 
 app.use("/api/users", users)
 app.use("/api/exercises", exercises)
-app.use("/api/workouts/", workouts)
+app.use("/api/workouts", workouts)
 
 
 

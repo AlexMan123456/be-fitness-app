@@ -1,44 +1,46 @@
 const { ObjectId } = require("mongodb");
 const { client, db } = require("../database/connection.js");
-const { fetchExerciseById } = require("./exercises-model.js");
 const workoutsDb = db.collection("workouts");
 
-function fetchWorkoutsByUserId(userId) {
+function fetchAllWorkouts(queries){
+    const validCols = ["total_duration", "level"]
+    const validOrder = ["ASC", "DESC"]
+
+    const sortBy = queries.sort_by ? queries.sort_by : "level"
+    const order = queries.order ? queries.order.toUpperCase() : "ASC"
+
+    if (!validCols.includes(sortBy)) {
+        return Promise.reject({status: 400, message: "Invalid sort by"})
+    }
+    if (!validOrder.includes(order)) {
+        return Promise.reject({status: 400, message: "Invalid order"})
+    }
+
     return client.connect().then(() => {
-        return workoutsDb.find({user_id: new ObjectId(userId)}).toArray();
+        return workoutsDb.aggregate([
+            { $sort: { [sortBy]: order === "DESC" ? -1 : 1 }}
+        ]).toArray()
+        //return workoutsDb.find({}).sort({[queries.sort_by]: normalizedOrder === "DESC" ? -1 : 1}).toArray()
     }).then((workouts) => {
-        if (workouts.length === 0) {
-            return Promise.reject({status: 404, message: "Workout not found"})
-        }
-        const allPromises = workouts.map((workout) => {
-            const userPromises = []
-            workout.exercise_ids.forEach((exerciseId) => {
-                userPromises.push(fetchExerciseById(exerciseId))
-            })
-            return Promise.all(userPromises)
-        })
-        return Promise.all([Promise.all(allPromises), workouts])
-    }).then(([exercises, workouts]) => {
-        workouts.forEach((workout, index) => {
-            workout.exercise_names = exercises[index].map((exercise) => {
-                return exercise.exercise_name
-            })
-            delete workout.exercise_ids
-        })
-        return workouts
+        return workouts;
     })
 }
 
-function fetchWorkoutById(workoutId) {
+
+function fetchWorkoutByLevel(workoutLevel) {
+    if (isNaN(workoutLevel)) {
+        return Promise.reject({status: 400, message: "Invalid level"})
+    }
     return client.connect().then(() => {
-        return workoutsDb.findOne({_id: new ObjectId(workoutId)});
+        return workoutsDb.findOne({level: parseInt(workoutLevel)});
     }).then((workout) => {
         if(!workout) {
             return Promise.reject({status: 404, message: "Workout not found"});
         }
-        return workout
+        return workout;
     })
+
 }
 
 
-module.exports = { fetchWorkoutsByUserId, fetchWorkoutById }
+module.exports = { fetchWorkoutByLevel, fetchAllWorkouts }

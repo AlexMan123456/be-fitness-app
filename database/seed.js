@@ -32,20 +32,21 @@ function seed({users, exercises, workouts}){
     }).then((workouts) => {
         const promises = workouts.map((workout) => {
             return Promise.all(
-                workout.exercise_ids.map((exerciseId) => {
-                    return db.collection("exercises").findOne({_id: exerciseId})
-                }))
-            })
+                workout.exercise_names.map((exerciseName) => {
+                    return db.collection("exercises").findOne({name: exerciseName})
+                })
+            )
+        })
         return Promise.all([Promise.all(promises), workouts])
-    }).then(([exercises, workouts]) => {
+    }).then(([exercisesForWorkouts, workouts]) => {
         const promises = workouts.map((workout, index) => {
             return db.collection("workouts").findOneAndUpdate({_id: workout._id}, {
                 $set: {
-                    total_duration: getTotalDurationOfWorkout(exercises[index]),
-                    exercises: exercises[index]
-                }, 
+                    exercises: exercisesForWorkouts[index],
+                    total_duration: getTotalDurationOfWorkout(exercisesForWorkouts[index])
+                },
                 $unset: {
-                    exercise_ids: ""
+                    exercise_names: ""
                 }
             })
         })
@@ -54,28 +55,19 @@ function seed({users, exercises, workouts}){
         return db.collection("users").find({}).toArray()
     }).then((users) => {
         const promises = users.map((user) => {
-            return Promise.all(
-                user.workout_ids.map((workoutId) => {
-                    return db.collection("workouts").findOne({_id: workoutId})
-                })
-            )
-        })
-        return Promise.all([Promise.all(promises), users])
-    }).then(([workouts, users]) => {
-        const promises = users.map((user, index) => {
+            user.reminders.forEach((reminder) => {
+                reminder.message = `Complete level ${user.level} today!`
+            })
             return db.collection("users").findOneAndUpdate({_id: user._id}, {
                 $set: {
-                    workouts: workouts[index]
-                },
-                $unset: {
-                    workout_ids: ""
+                    reminders: user.reminders
                 }
             })
         })
         return Promise.all(promises)
     })
     .catch((err) => {
-        return err
+        console.log(err)
     })
 }
 

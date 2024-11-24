@@ -1,7 +1,7 @@
 const { fetchAllUsers, fetchUserById, updateUser } = require("../models/users-model")
 
 function getAllUsers(request, response, next){
-    fetchAllUsers().then((users) => {
+    fetchAllUsers(request.query).then((users) => {
         response.status(200).send({users})
     }).catch((err) => {
         next(err)

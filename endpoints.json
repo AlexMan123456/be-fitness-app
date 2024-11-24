@@ -1,66 +1,93 @@
 {
     "users": {
         "GET /api/users": {
-            "description": "Returns an array of object representations of users",
+            "description": "Returns an array of object representations of users (sorted by level in ascending order)",
             "exampleRequest": "GET /api/users",
             "exampleResponse": {
                 "users": [
                     {
-                        "_id": "673b26e3656d6301098761d0",
+                        "_id": "673f41e3f6e7ff753e12833e",
                         "name": "Alice Johnson",
                         "email": "alice.johnson@example.com",
                         "age": 29,
                         "height": 165,
-                        "weight": 60,
-                        "xp": 1200,
+                        "weight": 68,
+                        "xp": 120,
+                        "level": 1,
                         "goals": [
                             "Lose weight",
+                            "Build core strength"
+                        ],
+                        "reminders": [
+                            {
+                                "reminder_time": "2024-11-21T08:00:00.000Z",
+                                "message": "Complete level 1 today!"
+                            }
+                        ],
+                        "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"
+                    },
+                    {
+                        "_id": "673f41e3f6e7ff753e12833f",
+                        "name": "Bob Smith",
+                        "email": "bob.smith@example.com",
+                        "age": 34,
+                        "height": 180,
+                        "weight": 75,
+                        "xp": 220,
+                        "level": 3,
+                        "goals": [
+                            "Gain muscle",
+                            "Improve stamina"
+                        ],
+                        "reminders": [
+                            {
+                                "reminder_time": "2024-11-21T07:30:00.000Z",
+                                "message": "Complete level 3 today!"
+                            }
+                        ],
+                        "workout_log": [
+                            {
+                                "level": 1,
+                                "date_completed": "2024-11-19T07:30:00.000Z"
+                            },
+                            {
+                                "level": 2,
+                                "date_completed": "2024-11-20T07:30:00.000Z"
+                            }
+                        ],
+                        "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"
+                    },
+                    {
+                        "_id": "673f41e3f6e7ff753e128340",
+                        "name": "Charlie Lee",
+                        "email": "charlie.lee@example.com",
+                        "age": 25,
+                        "height": 172,
+                        "weight": 70,
+                        "xp": 300,
+                        "level": 4,
+                        "goals": [
+                            "Build strength",
                             "Run a marathon"
                         ],
                         "reminders": [
                             {
-                                "workout_id": "673b26e3656d6301098761e0",
-                                "reminder_time": "2024-11-20T08:00:00Z"
+                                "reminder_time": "2024-11-21T06:30:00.000Z",
+                                "message": "Complete level 4 today!"
                             }
                         ],
-                        "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"
-                    },
-                    {
-                        "_id": "673b26e3656d6301098761d1",
-                        "name": "Bob Smith",
-                        "email": "bob.smith@example.com",
-                        "age": 35,
-                        "height": 180,
-                        "weight": 85,
-                        "xp": 900,
-                        "goals": [
-                            "Build muscle",
-                            "Improve flexibility"
-                        ],
-                        "reminders": [
+                        "workout_log": [
                             {
-                                "workout_id": "673b26e3656d6301098761e1",
-                                "reminder_time": "2024-11-19T07:30:00Z"
-                            }
-                        ],
-                        "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"
-                    },
-                    {
-                        "_id": "673b26e3656d6301098761d2",
-                        "name": "Charlie Davis",
-                        "email": "charlie.davis@example.com",
-                        "age": 24,
-                        "height": 172,
-                        "weight": 70,
-                        "xp": 600,
-                        "goals": [
-                            "Increase stamina",
-                            "Learn yoga"
-                        ],
-                        "reminders": [
+                                "level": 1,
+                                "date_completed": "2024-11-18T06:30:00.000Z"
+                            },
                             {
-                                "workout_id": "673b26e3656d6301098761e2",
-                                "reminder_time": "2024-11-20T06:00:00Z"
+                                "level": 2,
+                                "date_completed": "2024-11-19T06:30:00.000Z"
+                            },
+                            {
+                                "level": 3,
+                                "date_completed": "2024-11-20T06:30:00.000Z"
                             }
                         ],
                         "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"
@@ -70,24 +97,25 @@
         },
         "GET /api/users/:user_id": {
             "description": "Returns a single user given the user ID",
-            "exampleRequest": "GET /api/users/673b26e3656d6301098761d2",
+            "exampleRequest": "GET /api/users/673f41e3f6e7ff753e12833e",
             "exampleResponse": {
                 "user": {
-                    "_id": "673b26e3656d6301098761d2",
-                    "name": "Charlie Davis",
-                    "email": "charlie.davis@example.com",
-                    "age": 24,
-                    "height": 172,
-                    "weight": 70,
-                    "xp": 600,
+                    "_id": "673f41e3f6e7ff753e12833e",
+                    "name": "Alice Johnson",
+                    "email": "alice.johnson@example.com",
+                    "age": 29,
+                    "height": 165,
+                    "weight": 68,
+                    "xp": 120,
+                    "level": 1,
                     "goals": [
-                        "Increase stamina",
-                        "Learn yoga"
+                        "Lose weight",
+                        "Build core strength"
                     ],
                     "reminders": [
                         {
-                            "workout_id": "673b26e3656d6301098761e2",
-                            "reminder_time": "2024-11-20T06:00:00Z"
+                            "reminder_time": "2024-11-21T08:00:00.000Z",
+                            "message": "Complete level 1 today!"
                         }
                     ],
                     "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"
@@ -96,31 +124,222 @@
         },
         "PATCH /api/users/:user_id": {
             "description": "Adds a new goal to user goals array",
-            "exampleRequest": "PATCH /api/users/673b26e3656d6301098761d2",
+            "exampleRequest": "PATCH /api/users/673f41e3f6e7ff753e12833e",
             "exampleRequestBody": {
-                "goal": "Goal A" 
+                "remove_goal": "Build core strength",
+                "add_goal": "Goal A",
+                "level_increment": 1
+            },
+            "userBeforePatch": {
+                "_id": "673f41e3f6e7ff753e12833e",
+                "name": "Alice Johnson",
+                "email": "alice.johnson@example.com",
+                "age": 29,
+                "height": 165,
+                "weight": 68,
+                "xp": 120,
+                "level": 1,
+                "goals": [
+                    "Lose weight",
+                    "Goal A"
+                ],
+                "reminders": [
+                    {
+                        "reminder_time": "2024-11-22T08:00:00.000Z",
+                        "message": "Complete level 2 today!"
+                    }
+                ],
+                "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"
             },
             "exampleResponse": {
                 "user": {
-                    "_id": "673b26e3656d6301098761d2",
-                    "name": "Charlie Davis",
-                    "email": "charlie.davis@example.com",
-                    "age": 24,
-                    "height": 172,
-                    "weight": 70,
-                    "xp": 600,
+                    "_id": "673f41e3f6e7ff753e12833e",
+                    "name": "Alice Johnson",
+                    "email": "alice.johnson@example.com",
+                    "age": 29,
+                    "height": 165,
+                    "weight": 68,
+                    "xp": 120,
+                    "level": 2,
                     "goals": [
-                        "Increase stamina",
-                        "Learn yoga",
+                        "Lose weight",
+                        "Build core strength",
                         "Goal A"
                     ],
                     "reminders": [
                         {
-                            "workout_id": "673b26e3656d6301098761e2",
-                            "reminder_time": "2024-11-20T06:00:00Z"
+                            "reminder_time": "2024-11-22T08:00:00.000Z",
+                            "message": "Complete level 2 today!"
+                        }
+                    ],
+                    "workout_log": [
+                        {
+                            "level": 1,
+                            "date_completed": "2024-11-21T08:00:00.000Z"
                         }
                     ],
                     "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"
+                }
+            }
+        }
+    },
+    "workouts": {
+        "GET /api/workouts": {
+            "description": "Returns an array of all workouts",
+            "exampleRequest": "GET /api/workouts",
+            "exampleResponse": {
+                "workouts": [
+                    {
+                        "_id": "673f4bb48958f2f4ae53320e",
+                        "level": 1,
+                        "exercises": [
+                            {
+                                "_id": "673f4bb48958f2f4ae533205",
+                                "name": "Push-Ups",
+                                "type": "Strength",
+                                "target_muscle_group": "Chest",
+                                "duration_in_seconds": 30,
+                                "description": "A bodyweight exercise to strengthen the chest, shoulders, and triceps.",
+                                "xp": 50
+                            },
+                            {
+                                "_id": "673f4bb48958f2f4ae533208",
+                                "name": "Jumping Jacks",
+                                "type": "Cardio",
+                                "target_muscle_group": "Full Body",
+                                "duration_in_seconds": 45,
+                                "description": "A cardio exercise to improve endurance and warm up the body.",
+                                "xp": 40
+                            },
+                            {
+                                "_id": "673f4bb48958f2f4ae533207",
+                                "name": "Plank",
+                                "type": "Core",
+                                "target_muscle_group": "Abs",
+                                "duration_in_seconds": 60,
+                                "description": "Hold your body in a straight line while supporting your weight on your forearms and toes.",
+                                "xp": 70
+                            }
+                        ],
+                        "total_duration": 135
+                    },
+                    {
+                        "_id": "673f4bb48958f2f4ae53320f",
+                        "level": 2,
+                        "exercises": [
+                            {
+                                "_id": "673f4bb48958f2f4ae533206",
+                                "name": "Squats",
+                                "type": "Strength",
+                                "target_muscle_group": "Legs",
+                                "duration_in_seconds": 40,
+                                "description": "A lower body exercise that targets quads, hamstrings, and glutes.",
+                                "xp": 60
+                            },
+                            {
+                                "_id": "673f4bb48958f2f4ae533207",
+                                "name": "Plank",
+                                "type": "Core",
+                                "target_muscle_group": "Abs",
+                                "duration_in_seconds": 60,
+                                "description": "Hold your body in a straight line while supporting your weight on your forearms and toes.",
+                                "xp": 70
+                            },
+                            {
+                                "_id": "673f4bb48958f2f4ae53320c",
+                                "name": "Mountain Climbers",
+                                "type": "Cardio",
+                                "target_muscle_group": "Core",
+                                "duration_in_seconds": 40,
+                                "description": "A cardio exercise that engages your core and improves agility.",
+                                "xp": 60
+                            }
+                        ],
+                        "total_duration": 140
+                    },
+                    {
+                        "_id": "673f4bb48958f2f4ae533210",
+                        "level": 3,
+                        "exercises": [
+                            {
+                                "_id": "673f4bb48958f2f4ae53320a",
+                                "name": "Burpees",
+                                "type": "Cardio",
+                                "target_muscle_group": "Full Body",
+                                "duration_in_seconds": 60,
+                                "description": "A high-intensity full-body exercise for endurance and strength.",
+                                "xp": 80
+                            },
+                            {
+                                "_id": "673f4bb48958f2f4ae53320b",
+                                "name": "Lunges",
+                                "type": "Strength",
+                                "target_muscle_group": "Legs",
+                                "duration_in_seconds": 50,
+                                "description": "A single-leg exercise to strengthen quads, hamstrings, and glutes.",
+                                "xp": 70
+                            },
+                            {
+                                "_id": "673f4bb48958f2f4ae533205",
+                                "name": "Push-Ups",
+                                "type": "Strength",
+                                "target_muscle_group": "Chest",
+                                "duration_in_seconds": 30,
+                                "description": "A bodyweight exercise to strengthen the chest, shoulders, and triceps.",
+                                "xp": 50
+                            },
+                            {
+                                "_id": "673f4bb48958f2f4ae533208",
+                                "name": "Jumping Jacks",
+                                "type": "Cardio",
+                                "target_muscle_group": "Full Body",
+                                "duration_in_seconds": 45,
+                                "description": "A cardio exercise to improve endurance and warm up the body.",
+                                "xp": 40
+                            }
+                        ],
+                        "total_duration": 185
+                    }
+                ]
+            }
+        },
+        "GET /api/workouts/:level": {
+            "description": "Returns a workout given its level",
+            "exampleRequest": "GET /api/workouts/1",
+            "exampleResponse": {
+                "workout": {
+                    "_id": "673f4bb48958f2f4ae53320e",
+                    "level": 1,
+                    "exercises": [
+                        {
+                            "_id": "673f4bb48958f2f4ae533205",
+                            "name": "Push-Ups",
+                            "type": "Strength",
+                            "target_muscle_group": "Chest",
+                            "duration_in_seconds": 30,
+                            "description": "A bodyweight exercise to strengthen the chest, shoulders, and triceps.",
+                            "xp": 50
+                        },
+                        {
+                            "_id": "673f4bb48958f2f4ae533208",
+                            "name": "Jumping Jacks",
+                            "type": "Cardio",
+                            "target_muscle_group": "Full Body",
+                            "duration_in_seconds": 45,
+                            "description": "A cardio exercise to improve endurance and warm up the body.",
+                            "xp": 40
+                        },
+                        {
+                            "_id": "673f4bb48958f2f4ae533207",
+                            "name": "Plank",
+                            "type": "Core",
+                            "target_muscle_group": "Abs",
+                            "duration_in_seconds": 60,
+                            "description": "Hold your body in a straight line while supporting your weight on your forearms and toes.",
+                            "xp": 70
+                        }
+                    ],
+                    "total_duration": 135
                 }
             }
         }

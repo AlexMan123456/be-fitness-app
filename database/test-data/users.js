@@ -1,70 +1,45 @@
-const { ObjectId } = require("mongodb");
+const { ObjectId } = require("mongodb")
 
-module.exports = [
+const users = [
   {
-    _id: new ObjectId("673b26e3656d6301098761d0"),
+    _id: new ObjectId("648d9f1a7a2d5b1f1e6d1234"),
     name: "Alice Johnson",
     email: "alice.johnson@example.com",
-    age: 30,
-    height: 165,
-    weight: 55,
-    xp: 1500,
-    difficulty_level: 2,
-    goals: ["Lose weight", "Build endurance"],
-    reminders: [
-      {
-        workout_id: new ObjectId("673b26e3656d6301098761e0"),
-        reminder_time: new Date("2024-11-21T08:00:00Z")
-      }
-    ],
-    workout_ids: [
-      new ObjectId("673b26e3656d6301098761e0"), // Difficulty level 1
-      new ObjectId("673b26e3656d6301098761e2"), // Difficulty level 2
-      new ObjectId("673b26e3656d6301098761e4")  // Difficulty level 2
-    ]
+    age: 29,
+    xp: 120,
+    level: 1,
+    goals: ["Lose weight", "Build core strength"],
+    reminders: [{ reminder_time: new Date("2024-11-21T08:00:00") }],
   },
   {
-    _id: new ObjectId("673b26e3656d6301098761d1"),
+    _id: new ObjectId("648d9f1a7a2d5b1f1e6d1235"),
     name: "Bob Smith",
     email: "bob.smith@example.com",
-    age: 25,
-    height: 180,
-    weight: 75,
-    xp: 2000,
-    difficulty_level: 3,
-    goals: ["Gain muscle", "Increase strength"],
-    reminders: [
-      {
-        workout_id: new ObjectId("673b26e3656d6301098761e1"),
-        reminder_time: new Date("2024-11-22T08:00:00Z")
-      }
-    ],
-    workout_ids: [
-      new ObjectId("673b26e3656d6301098761e1"), // Difficulty level 3
-      new ObjectId("673b26e3656d6301098761e3"), // Difficulty level 3
-      new ObjectId("673b26e3656d6301098761e5")  // Difficulty level 3
+    age: 34,
+    xp: 220,
+    level: 3,
+    goals: ["Gain muscle", "Improve stamina"],
+    reminders: [{ reminder_time: new Date("2024-11-21T07:30:00") }],
+    workout_log: [
+      {level: 1, date_completed: new Date("2024-11-19T07:30:00")},
+      {level: 2, date_completed: new Date("2024-11-20T07:30:00")}
     ]
   },
   {
-    _id: new ObjectId("673b26e3656d6301098761d2"),
-    name: "Charlie Davis",
-    email: "charlie.davis@example.com",
-    age: 40,
-    height: 175,
-    weight: 68,
-    xp: 1000,
-    difficulty_level: 1,
-    goals: ["Improve flexibility", "Stay active"],
-    reminders: [
-      {
-        workout_id: new ObjectId("673b26e3656d6301098761e0"),
-        reminder_time: new Date("2024-11-21T10:00:00Z")
-      }
-    ],
-    workout_ids: [
-      new ObjectId("673b26e3656d6301098761e0"), // Difficulty level 1
-      new ObjectId("673b26e3656d6301098761e6"), // Difficulty level 1
-      new ObjectId("673b26e3656d6301098761e7")  // Difficulty level 1
+    _id: new ObjectId("648d9f1a7a2d5b1f1e6d1236"),
+    name: "Charlie Lee",
+    email: "charlie.lee@example.com",
+    age: 25,
+    xp: 300,
+    level: 4,
+    goals: ["Build strength", "Run a marathon"],
+    reminders: [{ reminder_time: new Date("2024-11-21T06:30:00") }],
+    workout_log: [
+      {level: 1, date_completed: new Date("2024-11-18T06:30:00")},
+      {level: 2, date_completed: new Date("2024-11-19T06:30:00")},
+      {level: 3, date_completed: new Date("2024-11-20T06:30:00")}
     ]
-  }
+  },
 ]
+
+module.exports = users

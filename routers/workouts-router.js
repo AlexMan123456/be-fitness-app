@@ -1,9 +1,12 @@
 const express = require("express");
-const { getWorkoutById } = require("../controllers/workouts-controller");
+const { getWorkoutByLevel, getAllWorkouts } = require("../controllers/workouts-controller");
 
 const router = express.Router();
 
-router.route("/:workout_id")
-.get(getWorkoutById)
+router.route("/")
+.get(getAllWorkouts)
+
+router.route("/:level")
+.get(getWorkoutByLevel)
 
 module.exports = router;

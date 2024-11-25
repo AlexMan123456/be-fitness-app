@@ -5,7 +5,7 @@ const workoutsDb = db.collection("workouts");
 function fetchAllWorkouts(queries){
     const validCols = ["total_duration", "level"]
     const validOrder = ["ASC", "DESC"]
-
+    //quick comment so I can make pull request
     const sortBy = queries.sort_by ? queries.sort_by : "level"
     const order = queries.order ? queries.order.toUpperCase() : "ASC"
 

@@ -37,7 +37,7 @@ function fetchUserById(userId, queries){
 }
 
 function updateUser(userId, propertiesToUpdate){
-    const validKeys = ["level_increment", "image_url"]
+    const validKeys = ["level_increment", "image_url", "xp_increment"]
     for(const key of Object.keys(propertiesToUpdate)){
         if(!validKeys.includes(key)){
             delete propertiesToUpdate[key]
@@ -84,6 +84,7 @@ function updateUser(userId, propertiesToUpdate){
         }
 
         // handle image_url updates
+        if(propertiesToUpdate.image_url){
         if (propertiesToUpdate.image_url !== undefined) {
             if (typeof propertiesToUpdate.image_url !== "string") {
                 return Promise.reject({ status: 400, message: "Invalid image URL" });
@@ -93,7 +94,19 @@ function updateUser(userId, propertiesToUpdate){
                 return Promise.reject({ status: 400, message: "Invalid image URL" });
             }
             newProperties.image_url = propertiesToUpdate.image_url;
+        }
+        }
 
+        // Handle `xp_increment`
+        
+        if (propertiesToUpdate.xp_increment) {
+        if (propertiesToUpdate.xp_increment !== undefined) {
+            if (typeof propertiesToUpdate.xp_increment !== "number") {
+                return Promise.reject({ status: 400, message: "XP increment must be a number" });
+            }
+            const newXP = user.xp + propertiesToUpdate.xp_increment;
+            newProperties.xp = Math.max(0, newXP);
+        }
         }
 
 

@@ -126,7 +126,9 @@
             "description": "Increments the level of a user by 1 or -1, adding or removing from workout_log",
             "exampleRequest": "PATCH /api/users/673f41e3f6e7ff753e12833e",
             "exampleRequestBody": {
-                "level_increment": 1
+                "level_increment": 1,
+                "image_url":"https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg",
+                "xp_increment": 100
             },
             "userBeforePatch": {
                 "_id": "673f41e3f6e7ff753e12833e",
@@ -147,7 +149,7 @@
                         "message": "Complete level 2 today!"
                     }
                 ],
-                "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"
+                "image_url": "https://hips.hearstapps.com/hmg-prod/images/hlh070123feacover-004-hi-646d26d7015ef.jpg"                
             },
             "exampleResponse": {
                 "user": {
@@ -157,7 +159,7 @@
                     "age": 29,
                     "height": 165,
                     "weight": 68,
-                    "xp": 120,
+                    "xp": 220,
                     "level": 2,
                     "goals": [
                         "Lose weight",

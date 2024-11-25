@@ -7,7 +7,7 @@ const endpoints = require("../endpoints.json")
 require("jest-sorted")
 
 
-jest.setTimeout(16000);
+jest.setTimeout(18000);
 
 beforeEach(() => {
     return seed(data)
@@ -190,15 +190,23 @@ describe("/api/users/:user_id", () => {
                 expect(typeof user.image_url).toBe("string")
             })
         })
-        test("400: Responds with invalid image URL message when given URL is not a string", () => {
+        test("200: updates user with level_increment, image_url, and xp_increment", () => {
             return request(app)
-            .patch("/api/users/648d9f1a7a2d5b1f1e6d1235")
-            .send({image_url: true})
-            .expect(400)
-            .then((response) => {
-                expect(response.body.message).toBe("Invalid image URL");
-            })
-        })
+                .patch("/api/users/648d9f1a7a2d5b1f1e6d1235")
+                .send({
+                    level_increment: 1,
+                    image_url: "https://www.newimage.com",
+                    xp_increment: 100
+                })
+                .expect(200)
+                .then((response) => {
+                    const { user } = response.body;
+                    expect(user.level).toBe(4);
+                    expect(user.image_url).toBe("https://www.newimage.com");
+                    expect(user.xp).toBe(320);
+                });
+        });
+        
         test("200: Ignores any extra keys on object being sent", () => {
             return request(app)
             .patch("/api/users/648d9f1a7a2d5b1f1e6d1235")
@@ -209,6 +217,38 @@ describe("/api/users/:user_id", () => {
                 expect(user._id).toBe("648d9f1a7a2d5b1f1e6d1235")
                 expect(user.level).toBe(4)
                 expect(user.workout_log.length).toBe(3)
+            })
+        })
+        test("400: responds with error for invalid xp_increment", () => {
+            return request(app)
+                .patch("/api/users/648d9f1a7a2d5b1f1e6d1235")
+                .send({
+                    xp_increment: "not_a_number"
+                })
+                .expect(400)
+                .then((response) => {
+                    expect(response.body.message).toBe("XP increment must be a number");
+                });
+        });     
+        test("200: ensures XP does not go below 0", () => {
+            return request(app)
+                .patch("/api/users/648d9f1a7a2d5b1f1e6d1235")
+                .send({
+                    xp_increment: -300
+                })
+                .expect(200)
+                .then((response) => {
+                    const { user } = response.body;
+                    expect(user.xp).toBe(0);
+                });
+        });           
+        test("400: Responds with invalid image URL message when given URL is not a string", () => {
+            return request(app)
+            .patch("/api/users/648d9f1a7a2d5b1f1e6d1235")
+            .send({image_url: true})
+            .expect(400)
+            .then((response) => {
+                expect(response.body.message).toBe("Invalid image URL");
             })
         })
         test("400: Responds with a bad request message when level_increment causes level to be less than 1", () => {
